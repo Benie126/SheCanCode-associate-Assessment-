@@ -87,6 +87,8 @@ Processes a payment with idempotency guarantee.
   "currency": "RWF"
 }
 
+```
+
 ### Responses
 
 | Status Code | Scenario | Header | Body |
