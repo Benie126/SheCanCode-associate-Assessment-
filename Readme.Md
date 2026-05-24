@@ -35,6 +35,7 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
 
 cd SheCanCode-associate-Assessment-
+---
 ## Run the Application (Windows)
 
 To start the Spring Boot application on Windows, use the Maven Wrapper command below:
