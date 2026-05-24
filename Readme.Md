@@ -138,21 +138,21 @@ Response:
 - **Response:** `{"status":"success","message":"Charged 100.00 RWF","cached":false}`
 - **Proof:** New transaction ID generated, payment processed with 2-second delay
 
-![First Transaction](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/main/screenshots/us1-first-transaction.PNG?raw=true)
+![image alt](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/37705e4ee4fcf3ea55531d324525ca0c786346c3/screenshots/us1-first-transaction.PNG)
 
 ### User Story 2: Duplicate Attempt 
 - **Status:** 200 OK 
 - **Response:** `{"status":"success","message":"Charged 100.00 RWF","cached":true}`
 - **Proof:** Same transaction ID returned instantly, `X-Cache-Hit: true`, no double charge
 
-![Duplicate Attempt](screenshots/us2-duplicate-attempt.png)
+![image alt](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/37705e4ee4fcf3ea55531d324525ca0c786346c3/screenshots/us2-duplicate-attempt.PNG)
 
 ### User Story 3: Different Body, Same Key 
 - **Status:** 422 Unprocessable Entity 
 - **Response:** `{"status":"error","message":"Idempotency key already used for a different request body"}`
 - **Proof:** Request rejected, no transaction processed, fraud attempt blocked
 
-![Fraud Detection](screenshots/us3-fraud-detection.png)
+![image alt](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/37705e4ee4fcf3ea55531d324525ca0c786346c3/screenshots/us3-fraud-detection.PNG)
 ## Developer's Choice Feature
 
 ### Audit Logging for Compliance & Debugging
