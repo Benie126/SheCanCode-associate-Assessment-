@@ -12,3 +12,8 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 - [Bonus: Race Condition Handling](#bonus-race-condition-handling)
 - [Testing](#testing)
 - [Project Structure](#project-structure)  
+
+
+## Architecture Diagram
+
+![image alt](
