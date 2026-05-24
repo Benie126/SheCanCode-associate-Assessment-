@@ -54,5 +54,64 @@ curl http://localhost:9090/api/v1/health
 
 ---
 
+## API Documentation
+
+### Base URL
+> http://localhost:9090/api/v1
+
+
+### Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/process-payment` | Process a payment with idempotency |
+| `GET` | `/health` | Health check |
+
+---
+
+### POST /process-payment
+
+Processes a payment with idempotency guarantee.
+
+**Headers:**
+
+| Header | Required | Description |
+|--------|----------|-------------|
+| `Idempotency-Key` | Yes | Unique identifier for the transaction |
+| `Content-Type` | Yes | Must be `application/json` |
+
+**Request Body:**
+```json
+{
+  "amount": 100,
+  "currency": "RWF"
+}
+
+### Responses
+
+| Status Code | Scenario | Header | Body |
+|-------------|----------|--------|------|
+| `201 Created` | First request | - | `{"status":"success","message":"Charged 100.00 RWF","transactionId":"TXN-...","cached":false}` |
+| `200 OK` | Duplicate request | `X-Cache-Hit: true` | `{"status":"success","message":"Charged 100.00 RWF","transactionId":"TXN-...","cached":true}` |
+| `422 Unprocessable Entity` | Same key, different body | - | `{"status":"error","message":"Idempotency key already used for a different request body","cached":false}` |
+
+### Example:
+
+```bash
+curl -X POST http://localhost:9090/api/v1/process-payment \
+  -H "Idempotency-Key: test-123" \
+  -H "Content-Type: application/json" \
+  -d '{"amount":100,"currency":"RWF"}'
+```
+### GET /health
+
+Response:
+
+Idempotency Gateway is running
+
+
+---
+
+
 
 
