@@ -8,6 +8,7 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 - [Setup Instructions](#setup-instructions)
 - [API Documentation](#api-documentation)
 - [Design Decisions](#design-decisions)
+- [User Stories - Test Evidence](#user-stories---test-evidence)
 - [Developer's Choice Feature](#developers-choice-feature)
 - [Bonus: Race Condition Handling](#bonus-race-condition-handling)
 - [Testing](#testing)
@@ -154,7 +155,6 @@ Response:
 
 ![image alt](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/37705e4ee4fcf3ea55531d324525ca0c786346c3/screenshots/us3-fraud-detection.PNG)
 ## Developer's Choice Feature
-
 ### Audit Logging for Compliance & Debugging
 
 Every idempotency event is logged to `audit.log` with timestamp, key, action, and result. This provides a complete audit trail for compliance, dispute resolution, and debugging.
@@ -200,12 +200,77 @@ PS C:\Users\PROBYTE\Downloads\SheCanCode-associate-Assessment-> type audit.log
 [2026-05-24T17:02:57] Key: audit-test | Action: DUPLICATE | Result: Returned cached response - no double charge
 
 ```
+## Bonus: Race Condition Handling
 
+When two identical requests arrive simultaneously:
+
+1. Request A acquires the key and starts processing
+2. Request B detects PROCESSING status and waits
+3. Request B polls every second until A completes
+4. Request B receives the cached response from Request A
+
+**Result:** Payment processed exactly once. No double charges, no errors.
+
+---
+
+## Testing
+
+### PowerShell
+
+```powershell
+# First request (2 second delay, 201 Created)
+$body = '{"amount":100,"currency":"RWF"}'
+Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post -Headers @{"Idempotency-Key"="test-123"; "Content-Type"="application/json"} -Body $body
+
+# Duplicate request (instant, 200 OK, X-Cache-Hit: true)
+$body = '{"amount":100,"currency":"RWF"}'
+Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post -Headers @{"Idempotency-Key"="test-123"; "Content-Type"="application/json"} -Body $body
+
+# Fraud detection (422 Unprocessable Entity)
+$body = '{"amount":500,"currency":"RWF"}'
+Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post -Headers @{"Idempotency-Key"="test-123"; "Content-Type"="application/json"} -Body $body
+
+# New payment with new key
+$body = '{"amount":50,"currency":"RWF"}'
+Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post -Headers @{"Idempotency-Key"="test-456"; "Content-Type"="application/json"} -Body $body
+
+###  cURL
+
+```bash
+# First request
+curl -X POST http://localhost:9090/api/v1/process-payment -H "Idempotency-Key: test-123" -H "Content-Type: application/json" -d '{"amount":100,"currency":"RWF"}'
+
+# Duplicate request
+curl -X POST http://localhost:9090/api/v1/process-payment -H "Idempotency-Key: test-123" -H "Content-Type: application/json" -d '{"amount":100,"currency":"RWF"}' -v
+
+# Fraud detection
+curl -X POST http://localhost:9090/api/v1/process-payment -H "Idempotency-Key: test-123" -H "Content-Type: application/json" -d '{"amount":500,"currency":"RWF"}'
+
+```
 ### Startup Confirmation
 
 When the server starts, the console displays:
 
 Audit logging started - writing to audit.log
+
+## Built With
+
+- **Spring Boot 3.5.14**
+- **Java 21**
+- **Maven Wrapper**
+- **ConcurrentHashMap** (Thread-safe in-memory storage)
+
+---
+
+## Author
+
+**Benie** - IgirePay Technologies
+
+---
+
+## License
+
+This project is part of the SheCanCode Associate Assessment.
 
 
 
