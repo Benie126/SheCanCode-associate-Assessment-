@@ -116,6 +116,21 @@ Response:
 
 ---
 
+## Design Decisions
+
+| Decision | Why |
+|----------|-----|
+| Spring Boot + Java | Industry standard framework, demonstrates enterprise proficiency |
+| ConcurrentHashMap | Thread-safe in-memory storage for concurrent request handling |
+| PROCESSING status per key | Prevents race conditions when duplicate requests arrive simultaneously |
+| 2-second processing delay | Simulates real-world payment gateway latency |
+| Request body comparison | Detects key misuse when different payloads use the same idempotency key |
+| Synchronous waiting (polling) | Handles in-flight requests without complex locking mechanisms |
+| Minimal dependencies | Only `spring-boot-starter-web` required for faster startup and easier review |
+| Audit logging to file | Provides compliance trail and debugging capability for production systems |
+| Daemon cleanup thread | Background thread removes expired records without blocking the application |
+| Graceful shutdown | Ensures in-flight payments complete before server stops |
+
 
 
 
