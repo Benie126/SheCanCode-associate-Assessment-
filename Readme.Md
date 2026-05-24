@@ -131,6 +131,28 @@ Response:
 | Daemon cleanup thread | Background thread removes expired records without blocking the application |
 | Graceful shutdown | Ensures in-flight payments complete before server stops |
 
+## User Stories - Test Evidence
+
+### User Story 1: First Transaction 
+- **Status:** 201 Created
+- **Response:** `{"status":"success","message":"Charged 100.00 RWF","cached":false}`
+- **Proof:** New transaction ID generated, payment processed with 2-second delay
+
+![First Transaction](screenshots/us1-first-transaction.png)
+
+### User Story 2: Duplicate Attempt 
+- **Status:** 200 OK 
+- **Response:** `{"status":"success","message":"Charged 100.00 RWF","cached":true}`
+- **Proof:** Same transaction ID returned instantly, `X-Cache-Hit: true`, no double charge
+
+![Duplicate Attempt](screenshots/us2-duplicate-attempt.png)
+
+### User Story 3: Different Body, Same Key 
+- **Status:** 422 Unprocessable Entity 
+- **Response:** `{"status":"error","message":"Idempotency key already used for a different request body"}`
+- **Proof:** Request rejected, no transaction processed, fraud attempt blocked
+
+![Fraud Detection](screenshots/us3-fraud-detection.png)
 ## Developer's Choice Feature
 
 ### Audit Logging for Compliance & Debugging
