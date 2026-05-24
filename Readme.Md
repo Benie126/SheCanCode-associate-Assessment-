@@ -170,11 +170,14 @@ Every idempotency event is logged to `audit.log` with timestamp, key, action, an
 | `IN_FLIGHT_COMPLETE` | Original request finished, result returned to waiting request |
 | `FAILED` | Payment processing interrupted or failed |
 
-### Sample audit.log
+### Proof of Audit Logging
+
+```bash
+PS C:\Users\PROBYTE\Downloads\SheCanCode-associate-Assessment-> type audit.log
 [2026-05-24T17:02:44] Key: audit-test | Action: FIRST_REQUEST | Result: Processed 100 RWF
 [2026-05-24T17:02:57] Key: audit-test | Action: DUPLICATE | Result: Returned cached response - no double charge
-[2026-05-24T17:03:15] Key: fraud-check | Action: CONFLICT | Result: Rejected - body mismatch (Fraud detected)
 
+```
 
 ### Startup Confirmation
 
