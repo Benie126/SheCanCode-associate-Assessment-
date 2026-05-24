@@ -21,19 +21,24 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 ## Setup Instructions
 
 ### Prerequisites
-- **Java 17** or higher 
-- **Maven** (wrapper included - no installation needed)
 
-### Quick Start
+- Java 17 or higher  
+- Maven Wrapper (already included — no installation needed)
 
-1. **Clone the repository:**
+---
+
+## Quick Start
+
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
-cd SheCanCode-associate-Assessment-
 
-### Start The Server 
+cd SheCanCode-associate-Assessment-
+## Run the Application (Windows)
+
+To start the Spring Boot application on Windows, use the Maven Wrapper command below:
 
 ```bash
 .\mvnw.cmd spring-boot:run
-
 
