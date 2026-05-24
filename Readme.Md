@@ -16,4 +16,4 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 
 ## Architecture Diagram
 
-![image alt](
+![image alt](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/66612764de59812a0356fbf5ee9eba2f5d63aa55/screenshots/ARCHITECTURE%20DIAGRAM.png)
