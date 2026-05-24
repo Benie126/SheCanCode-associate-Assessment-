@@ -138,7 +138,7 @@ Response:
 - **Response:** `{"status":"success","message":"Charged 100.00 RWF","cached":false}`
 - **Proof:** New transaction ID generated, payment processed with 2-second delay
 
-![First Transaction](screenshots/us1-first-transaction.png)
+![First Transaction](https://github.com/Benie126/SheCanCode-associate-Assessment-/blob/main/screenshots/us1-first-transaction.PNG?raw=true)
 
 ### User Story 2: Duplicate Attempt 
 - **Status:** 200 OK 
