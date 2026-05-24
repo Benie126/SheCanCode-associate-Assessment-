@@ -34,15 +34,15 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
 cd SheCanCode-associate-Assessment-
 
-2. **Mac/Linux: **
+2. **Mac/Linux:**
 ./mvnw spring-boot:run
 
 Server runs on: http://localhost:9090
 
-3. **Verify health: **
+3. **Verify health:**
 curl http://localhost:9090/api/v1/health
 
-4. **Response: **
+4. **Response:**
 Idempotency Gateway is running
 
 
