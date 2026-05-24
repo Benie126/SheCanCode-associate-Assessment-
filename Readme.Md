@@ -234,6 +234,7 @@ Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post
 $body = '{"amount":50,"currency":"RWF"}'
 Invoke-RestMethod -Uri http://localhost:9090/api/v1/process-payment -Method Post -Headers @{"Idempotency-Key"="test-456"; "Content-Type"="application/json"} -Body $body
 
+```
 ###  cURL
 
 ```bash
