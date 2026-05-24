@@ -95,14 +95,16 @@ Processes a payment with idempotency guarantee.
 | `200 OK` | Duplicate request | `X-Cache-Hit: true` | `{"status":"success","message":"Charged 100.00 RWF","transactionId":"TXN-...","cached":true}` |
 | `422 Unprocessable Entity` | Same key, different body | - | `{"status":"error","message":"Idempotency key already used for a different request body","cached":false}` |
 
-### Example:
+### Example Request
 
+**cURL:**
 ```bash
 curl -X POST http://localhost:9090/api/v1/process-payment \
   -H "Idempotency-Key: test-123" \
   -H "Content-Type: application/json" \
   -d '{"amount":100,"currency":"RWF"}'
 ```
+
 ### GET /health
 
 Response:
