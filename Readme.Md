@@ -29,21 +29,27 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 
 ### Quick Start
 
-1. **Clone the repository:**
+#### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
 cd SheCanCode-associate-Assessment-
+```
 
-2. **Mac/Linux:**
-./mvnw spring-boot:run
+#### 2. Start the server:
 
-Server runs on: http://localhost:9090
+```bash
+.\mvnw.cmd spring-boot:run
+```
 
-3. **Verify health:**
+#### 3. Server runs on:
+
+> http://localhost:9090
+
+#### 4. Verify health:
+
+```bash
 curl http://localhost:9090/api/v1/health
-
-4. **Response:**
-Idempotency Gateway is running
 ```
 
 ---
