@@ -111,10 +111,11 @@ curl -X POST http://localhost:9090/api/v1/process-payment \
 
 Response:
 
-Idempotency Gateway is running
+> Idempotency Gateway is running
 
 
 ---
+
 
 
 
