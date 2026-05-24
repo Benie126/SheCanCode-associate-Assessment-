@@ -24,3 +24,16 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 - **Java 17** or higher 
 - **Maven** (wrapper included - no installation needed)
 
+### Quick Start
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
+cd SheCanCode-associate-Assessment-
+
+### Start The Server 
+
+```bash
+.\mvnw.cmd spring-boot:run
+
+
