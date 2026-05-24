@@ -1,0 +1,2 @@
+[2026-05-24T17:02:44.337095200] Key: audit-test | Action: FIRST_REQUEST | Result: Processed 100 RWF
+[2026-05-24T17:02:57.611997] Key: audit-test | Action: DUPLICATE | Result: Returned cached response - no double charge
