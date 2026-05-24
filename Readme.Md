@@ -30,21 +30,26 @@ A production-grade payment middleware built with Spring Boot that guarantees exa
 ```bash
 git clone https://github.com/Benie126/SheCanCode-associate-Assessment-.git
 cd SheCanCode-associate-Assessment-
+--------------------------
 
 2. **Start the server:**
 
 **Windows:**
 ```bash
 .\mvnw.cmd spring-boot:run
+--------------------------
 
 Server runs on: http://localhost:9090
+-------------------------------------
 
 ## API Documentation
+------------------------
 
 ### Base URL
+------------------------
 
 http://localhost:9090/api/v1
-
+-----------------------------
 
 ### Endpoints
 
@@ -53,7 +58,7 @@ http://localhost:9090/api/v1
 | `POST` | `/process-payment` | Process a payment with idempotency |
 | `GET` | `/health` | Health check |
 
----
+--------------------------------
 
 ### POST /process-payment
 
@@ -72,6 +77,7 @@ Processes a payment with idempotency guarantee.
   "amount": 100,
   "currency": "RWF"
 }
+--------------------------------------
 
 ### Responses
 
