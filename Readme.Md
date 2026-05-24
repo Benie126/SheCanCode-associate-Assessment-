@@ -131,6 +131,56 @@ Response:
 | Daemon cleanup thread | Background thread removes expired records without blocking the application |
 | Graceful shutdown | Ensures in-flight payments complete before server stops |
 
+## Developer's Choice Feature
+
+### Audit Logging for Compliance & Debugging
+
+Every idempotency event is logged to `audit.log` with timestamp, key, action, and result. This provides a complete audit trail for compliance, dispute resolution, and debugging.
+
+### Why This Matters for Fintech
+
+**1. Regulatory Compliance**
+- Financial regulators require audit trails of all payment processing events
+- Provides proof that duplicate requests were caught and not double-charged
+- Each log entry includes timestamp, idempotency key, action taken, and result
+
+**2. Dispute Resolution**
+- When customers claim they were charged twice, the audit log proves otherwise
+- Clear record of FIRST_REQUEST, DUPLICATE, and CONFLICT events
+- Timestamps show the exact sequence of events
+
+**3. Debugging & Monitoring**
+- Developers can trace exactly what happened with any idempotency key
+- CONFLICT events reveal potential fraud attempts
+- IN_FLIGHT events show race condition handling in action
+
+**4. Operational Visibility**
+- Real-time console output shows audit events as they happen
+- Log file persists for historical analysis
+- Zero performance impact on payment processing
+
+### Log Events
+
+| Action | When It Occurs |
+|--------|---------------|
+| `FIRST_REQUEST` | New payment processed successfully |
+| `DUPLICATE` | Cached response returned - no double charge |
+| `CONFLICT` | Fraud attempt blocked - same key, different body |
+| `IN_FLIGHT` | Concurrent request waiting for original to complete |
+| `IN_FLIGHT_COMPLETE` | Original request finished, result returned to waiting request |
+| `FAILED` | Payment processing interrupted or failed |
+
+### Sample audit.log
+[2026-05-24T17:02:44] Key: audit-test | Action: FIRST_REQUEST | Result: Processed 100 RWF
+[2026-05-24T17:02:57] Key: audit-test | Action: DUPLICATE | Result: Returned cached response - no double charge
+[2026-05-24T17:03:15] Key: fraud-check | Action: CONFLICT | Result: Rejected - body mismatch (Fraud detected)
+
+
+### Startup Confirmation
+
+When the server starts, the console displays:
+
+Audit logging started - writing to audit.log
 
 
 
